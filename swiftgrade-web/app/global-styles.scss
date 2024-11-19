@@ -1,0 +1,13 @@
+#app {
+  overflow: hidden;
+  height: 100vh;
+}
+
+html,
+body {
+  background: #fff;
+}
+
+[aria-disabled="true"], [disabled] {
+  cursor: url(/block.png) 18 18, auto,
+}

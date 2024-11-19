@@ -1,0 +1,339 @@
+\documentclass[landscape]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{relsize}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{bm}
+\usepackage{xcolor}
+
+
+\geometry{
+    a4paper,
+    bindingoffset=0mm,
+    left=-2mm,
+    right=0mm,
+    top=3mm,
+    bottom=15mm,
+    footskip=3.25mm
+}
+
+\fancypagestyle{default}{
+  \fancyhf{}% No header/footer
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{last-page}{
+  \fancyhf{}
+  \fancyfoot[C]{
+    \textscale{1.2}{\textbf{SwiftGrade}}
+  }
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0}
+}
+\pagestyle{default}% Default page style
+\AtEndDocument{\thispagestyle{last-page}}% Page style at \end{document}
+
+\newcounter{rowno}
+\pagenumbering{gobble}
+\newcommand\var[1]{\underline{#1}}
+\newcommand\rownumber{\stepcounter{rowno}\arabic{rowno}}
+\newcommand\askip{\hspace{4pt}}
+\newcommand\lskip{\hspace{1pt}}
+
+% Custom colors
+\definecolor{headerBG}{HTML}{796eff}
+\definecolor{firstrowBG}{HTML}{d4d1fe}
+
+\definecolor{blankBG}{HTML}{ffffff}
+\definecolor{correctBG}{HTML}{bcefad}
+\definecolor{partialyBG}{HTML}{ffe489}
+\definecolor{incorrectBG}{HTML}{f89195}
+\definecolor{yellowBG}{HTML}{fdff00}
+
+\definecolor{correctFG}{HTML}{22b14c}
+\definecolor{partialyFG}{HTML}{d59102}
+\definecolor{incorrectFG}{HTML}{ed1c24}
+
+%% macro colorize(mark)
+    \block{-if mark.value == mark.total or mark.student_mark == mark.total
+    }correct\block{-elif mark.value == 0 or mark.student_mark == 0
+    }incorrect\block{-else}partialy\block{endif}
+%% endmacro
+
+%% macro set_space(prev_item_is_correct, item_is_correct)
+    \block{-if prev_item_is_correct and item_is_correct-}
+        {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut\askip}}\hspace{-1.5mm}
+    \block{-else-}
+        \askip
+    \block{-endif-}
+%% endmacro
+
+%% macro answer(row, answer, is_colorize)
+    %% set mark, total = row.marks, row.mark
+    %% set value = answer.value or answer.answer
+    %% set is_multiple = row.answers | count > 1
+    %% set is_correct = is_multiple and answer.id == row.correct_answer.id
+    %% set prev_item_is_correct = None
+
+    \block{-if is_colorize-}
+        \textcolor{\var{colorize(mark.answer)}FG}{
+    \block{-endif-}
+
+    \block{-if row.kind == 'mc'-}
+        \block{-if is_colorize-}
+            \var{compress('ABCDE', value) | join }
+        \block{-elif value-}
+            \var{value | sort | join}
+        \block{-endif-}
+    \block{-endif-}
+
+    \block{-if is_colorize-}
+        }
+    \block{-endif-}
+
+    \block{-if is_correct-}
+        \colorbox{blankBG}{\strut
+    \block{-endif-}
+
+    \block{-if is_colorize-}
+        \textcolor{\var{colorize(mark.answer)}FG}{
+    \block{-endif-}
+
+    \block{-if row.kind == 'numeric'-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut $\bm{\var{value}}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-elif value-}
+            $\var{value}$
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-elif row.kind == 'mf'-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut $\bm{\var{value}}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-elif value-}
+            $\var{value}$
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-elif row.kind == 'mc'-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut $\bm{\var{value}}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-elif value-}
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-else-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut \textbf{\var{value}}}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-elif value-}
+            \var{value}
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-endif-}
+
+    \block{-if 'scientific_notation' in row.setting and answer.scientific_notation-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            \var{set_space(prev_item_is_correct, True)}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut \textbf{E}\lskip $\bm{\var{answer.scientific_notation}}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-else-}
+            \var{set_space(prev_item_is_correct, False)}
+            E\lskip $\var{answer.scientific_notation}$
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-endif-}
+
+    \block{-if is_colorize-}
+        }
+    \block{-endif-}
+
+    \block{-if answer.tolerance-}
+        \block{-if is_correct and mark.answer.value > 0-}
+            \var{set_space(prev_item_is_correct, True)}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut $\bm{\pm\var{answer.tolerance}\%}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-else-}
+            \var{set_space(prev_item_is_correct, False)}
+            $\pm\var{answer.tolerance}\%$
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-endif}
+
+    \block{-if 'unit' in row.setting-}
+        \block{-if is_colorize-}
+            \color{\var{colorize(mark.unit)}FG}
+        \block{-endif-}
+        \block{-if is_correct and mark.unit.value > 0-}
+            \var{set_space(prev_item_is_correct, True)}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut $\bm{\var{answer.unit}}$}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-else-}
+            \var{set_space(prev_item_is_correct, False)}
+            \(\var{answer.unit}\)
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-endif-}
+
+    \block{-if 'significant_figure' in row.setting and (answer.value|trim or answer.unit|trim) -}
+        \block{-if is_colorize-}
+            \color{\var{colorize(mark.significant_figure)}FG}
+        \block{-endif-}
+        \block{-if is_correct and mark.significant_figure.value > 0-}
+            \var{set_space(prev_item_is_correct, True)}
+            {\setlength{\fboxsep}{0pt}\colorbox{yellowBG}{\strut \bf[SF:\var{answer.significant_figure}]}}
+            \block{-set prev_item_is_correct = True-}
+        \block{-else-}
+            \var{set_space(prev_item_is_correct, False)}
+            [SF:\var{answer.significant_figure}]
+            \block{-set prev_item_is_correct = False-}
+        \block{-endif-}
+    \block{-endif-}
+
+    \block{-if is_correct-}
+        }
+    \block{-endif-}
+
+    \block{-if is_multiple and not is_colorize-}
+        \block{-set marks = answer.marks-}
+        \askip
+        \block{-if row.kind == 'numeric'-}
+            (A: \var{marks.answer}
+            \block{-if marks.unit-}
+                , U: \var{marks.unit}
+            \block{-endif-}
+            \block{-if marks.significant_figure-}
+                , SF: \var{marks.significant_figure}
+            \block{-endif-}
+            \ marks)
+        \block{-elif row.kind == 'mf'-}
+            (A: \var{marks.answer}
+            \block{-if marks.unit-}
+                , U: \var{marks.unit}
+            \block{-endif-}
+            \ marks)
+        \block{-else-}
+            (\var{marks.answer} mark)
+        \block{-endif-}
+    \block{-endif-}
+%% endmacro
+
+
+\begin{document}
+
+    % Header
+    \begin{tikzpicture}
+      \draw[rounded corners=0.75mm,headerBG,fill=headerBG] (0cm,0cm) rectangle (29cm,2.5cm);
+    \end{tikzpicture}
+
+    \begin{center}
+        \vspace{-2.75cm}
+        \def\svgscale{0.1}
+        \includegraphics[scale=0.1]{tex/logo.png}\\
+        \textcolor{white}{
+            \textbf{\var{assessment_name}}\\
+            \textbf{Total mark: \var{total_mark}}
+	    }
+    \end{center}
+    \vspace{-22pt}
+    \textcolor{white}{
+        \hspace{20pt}
+        \textbf{\var{student_name}}
+        \hfill
+        \textbf{\var{group_name}}
+        \hspace{20pt}
+    }
+
+   \vspace{0.1mm}
+
+
+
+    % Table
+    %% set is_answer_key = kind == 'mark_plus_student_answers_plus_correct_answers'
+    %% set is_paper = type == 'paper'
+    %% set add_cols_len = 1 + is_paper + is_answer_key
+    \renewcommand{\arraystretch}{2.5}
+    \begin{longtable}[c]{
+            |>{\centering\arraybackslash}m{0.7cm}
+            %% for i in range(add_cols_len)
+                |>{\centering\arraybackslash}m{\var{23.6 / add_cols_len - 0.3}cm}
+            %% endfor
+            |>{\centering\arraybackslash}m{3cm}|}
+
+        % Header
+        \hline\rowcolor{firstrowBG}
+
+            \textbf{\#}
+            %% if is_answer_key
+                & \textbf{Answer key}
+            %% endif
+            & \textbf{Student answer}
+            %% if is_paper
+                & \textbf{Student image}
+            %% endif
+            & \textbf{Mark} \\
+        \hline
+
+        %% for row in rows
+            \rownumber
+
+            % Answer key
+            %% set is_multiple = row.answers | length > 1
+            %% set student_answer = row.student_answer
+            %% if is_answer_key
+                %% if is_multiple
+                    &
+                    %% for ans in row.answers
+                        \var{answer(row, ans, False)}
+                        %% if not loop.last
+                            \par\textcolor{gray}{or}\par
+                        %% endif
+                    %% endfor
+                %% else
+                    & \var{answer(row, row.correct_answer, False)}
+                %% endif
+            %% endif
+
+            % Student answer
+            & \var{answer(row, student_answer, True)}
+
+            % Student images
+            %% if is_paper
+                %% set image = row.student_image
+                & \vfill
+                    %% if image.answer
+                        \includegraphics[height=1cm]{\var{image.answer}}
+                    %% endif
+                    %% if image.unit
+                        \includegraphics[height=1cm]{\var{image.unit}}
+                    %% endif
+                \vfill
+            %% endif
+
+            % Mark
+            %% set answer, mark, total = row['student_answer'], row.marks, row.mark
+            & \cellcolor{\var{colorize(total)}BG}
+                %% if 'unit' not in row.setting and 'significant_figure' not in row.setting
+                    \var{mark.answer.value}/\var{mark.answer.total}
+                %% else
+                    \hspace{-2.5mm} A: \var{mark.answer.value}/\var{mark.answer.total}\par
+                    %% if 'unit' in row.setting
+                        U: \var{mark.unit.value}/\var{mark.unit.total}\par
+                    %% endif
+                    %% if 'significant_figure' in row.setting
+                        SF: \var{mark.significant_figure.value}/\var{mark.significant_figure.total}\par
+                    %% endif
+                    Total: \var{total.student_mark}/\var{total.total}
+                %% endif
+            \\\hline
+        %% endfor
+    \end{longtable}
+
+\end{document}

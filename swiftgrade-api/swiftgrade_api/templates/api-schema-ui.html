@@ -1,0 +1,11 @@
+{% extends "drf-yasg/swagger-ui.html" %}
+{% load static %}
+
+{% block main_scripts %}
+    <script src="{% static 'drf-yasg/swagger-ui-dist/swagger-ui-bundle.js' %}"></script>
+    <script src="{% static 'drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js' %}"></script>
+    <script src="{% static 'drf-yasg/insQ.min.js' %}"></script>
+    <script src="{% static 'drf-yasg/immutable.min.js' %}"></script>
+    <script src="{% static 'drf-yasg/url-polyfill.min.js' %}"></script>
+    <script src="{% static 'js/api-schema-ui-init.js' %}"></script>
+{% endblock %}

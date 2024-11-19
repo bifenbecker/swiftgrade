@@ -1,0 +1,26 @@
+[
+  {
+    "name": "backend-celery-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-celery-stage:latest"
+  },
+  {
+    "name": "backend-app-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-app-stage:latest"
+  },
+  {
+    "name": "backend-admin-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-admin-stage:latest"
+  },
+  {
+    "name": "cv-app-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/cv-app-stage:latest"
+  },
+  {
+    "name": "cv-celery-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/cv-celery-stage:latest"
+  },
+  {
+    "name": "nginx-stage",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/nginx-stage:latest"
+  }
+]

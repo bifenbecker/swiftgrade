@@ -1,0 +1,183 @@
+.mobile-theme {
+  background-color: #e0e0e0 !important;
+  .hg-button {
+    color: #555555;
+    height: 37px !important;
+    font-family: Symbola, "Times New Roman", serif;
+    font-weight: normal;
+    border-radius: 1px !important;
+    width: 100% !important;
+    border: 1px solid #d8d8d8;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.25), inset 0 -1px rgba(0, 0, 0, 0.02);
+    padding: 2px;
+    font-size: 15px;
+    @media (max-width: 350px) {
+      font-size: 12px;
+    }
+  }
+  .hg-row:not(:last-child) {
+    margin-bottom: 3px !important;
+  }
+  .mobile_service_symbols {
+    background: rgba(0, 0, 0, 0.13) !important;
+    font-style: normal;
+    font-family: arial, sans-serif;
+    border: 1px solid #bbb;
+  }
+  .letters {
+    font-style: italic;
+  }
+  .empty_button {
+    visibility: hidden;
+  }
+  .svg_functions {
+    span {
+      display: none !important;
+    }
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    color: #555555;
+  }
+  .a_superscript_b {
+    span {
+      display: none !important;
+    }
+    background-size: auto 40% !important;
+    background-image: url(/a_superscript_b.svg) !important;
+  }
+  .sqrt_n {
+    background-size: auto 50% !important;
+    background-image: url(/sqrt_n.svg) !important;
+  }
+  .a_superscript_2 {
+    background-size: auto 40% !important;
+    background-image: url(/a_superscript_2.svg) !important;
+  }
+  .a_subscript_b {
+    background-size: auto 30% !important;
+    background-image: url(/a_subscript_b.svg) !important;
+  }
+  .backspace {
+    background-size: auto 50% !important;
+    background-image: url(/backspace.svg) !important;
+  }
+  .numbers_helper {
+    color: rgb(34, 34, 34) !important;
+    font-size: 16px !important;
+  }
+  .enter {
+    span {
+      height: 13px !important;
+      font-size: 18px !important;
+    }
+  }
+  .tab {
+    font-size: 10px !important;
+  }
+  .move_buttons {
+    background: #4781b9 !important;
+    border: 1px solid #3f73a6;
+    span {
+      color: white !important;
+    }
+  }
+}
+
+.mobile-math-formula-theme {
+  .hg-button {
+    font-size: 15px;
+  }
+  .math_derivative {
+    font-size: 10px;
+    line-height: 6px;
+    text-align: center;
+    span {
+      width: 14px;
+    }
+  }
+  .math_numbers {
+    min-width: 16.2% !important;
+  }
+  .back_button {
+    background: rgba(0, 0, 0, 0.13) !important;
+    color: #555555;
+    font-size: 125%;
+    min-width: 14% !important;
+    font-family: Symbola, "Times New Roman", serif;
+  }
+  .set_button {
+    min-width: 14% !important;
+  }
+}
+
+.mobile-lower-letters-theme {
+  .letters_service_symbols {
+    min-width: 14% !important;
+  }
+}
+
+.mobile-upper-letters-theme {
+  .letters_service_symbols {
+    min-width: 14% !important;
+  }
+}
+
+.mobile-numbers-theme {
+  .numbers_service_symbols {
+    min-width: 18.9% !important;
+    @media (min-width: 500px) and (max-width: 599px){
+      min-width: 19.3% !important;
+    }
+    @media (min-width: 600px) {
+      min-width: 19.5% !important;
+    }
+  }
+  .math_letters_switcher {
+    font-size: 10px;
+    @media (max-width: 368px) and (orientation: portrait) {
+      font-size: 7px;
+    }
+  }
+  .functions {
+    font-size: 13px !important;
+    @media (max-width: 350px) {
+      font-size: 12px !important;
+    }
+  }
+  .tab {
+    @media (max-width: 340px) and (orientation: portrait) {
+      font-size: 8px !important;
+    }
+  }
+}
+
+.mobile-numeric-theme {
+  .hg-button {
+    font-size: 12px;
+    @media (max-width: 360px) and (orientation: portrait) {
+      font-size: 10px;
+    }
+    @media (max-width: 345px) and (orientation: portrait) {
+      font-size: 9px;
+    }
+  }
+  .numbers_service_symbols {
+    min-width: 29.1% !important;
+    @media (min-width: 601px) {
+      min-width: 29.4% !important;
+    }
+    @media (min-width: 961px) {
+      min-width: 29.54% !important;
+    }
+  }
+  .tab {
+    min-width: 19% !important;
+    font-size: 14px !important;
+  }
+}
+
+.mobile-set-notation-theme {
+  .back_button {
+    min-width: 15% !important;
+  }
+}

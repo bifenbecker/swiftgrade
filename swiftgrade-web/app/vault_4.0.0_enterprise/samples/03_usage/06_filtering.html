@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- meta block -->
+		<title>Files filtering - DHTMLX Vault</title>
+		<meta name="description" content="Check interactive samples of DHTMLX Vault to explore its usage and other details.">
+		<!-- end meta block -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+		<script type="text/javascript" src="../../codebase/vault.js?v=4.0.0"></script>
+		<link rel="stylesheet" href="../../codebase/vault.css?v=4.0.0">
+		<link rel="stylesheet" href="../common/index.css?v=4.0.0">
+		<link rel="stylesheet" href="../common/vault.css?v=4.0.0">
+		<script type="text/javascript" src="../common/dataset.js?v=4.0.0"></script>
+		<!-- custom sample head -->
+	</head>
+	<body>
+		<header class="dhx_sample-header">
+			<div class="dhx_sample-header__main">
+				<nav class="dhx_sample-header__breadcrumbs">
+					<ul class="dhx_sample-header-breadcrumbs">
+						<li class="dhx_sample-header-breadcrumbs__item">
+							<a href="../index.html" class="dhx_sample-header-breadcrumbs__link">Vault samples</a>
+						</li>
+						<li class="dhx_sample-header-breadcrumbs__item">
+							<a href="index.html" class="dhx_sample-header-breadcrumbs__link">Usage</a>
+						</li>
+						<li class="dhx_sample-header-breadcrumbs__item">
+							<span class="dhx_sample-header-breadcrumbs__link">Files filtering</span>
+						</li>
+					</ul>
+				</nav>
+				<h1 class="dhx_sample-header__title">
+					<div class="dhx_sample-header__content">
+						Files filtering.
+					</div>
+				</h1>
+			</div>
+</header>
+		<section class="dhx_sample-controls">
+			<div class="dhx_sample-form-group dhx_form-group dhx_form-group--inline">
+				<label for="min_width" class="dhx_label">Filter by name: </label>
+				<input type="text" id="min_width" class="dhx_input dhx_sample-input" onchange="filterByName(this.value)">
+			</div>
+		</section>
+		<section class="dhx_sample-container">
+			<div class="dhx_sample-container__widget" id="vault"></div>
+		</section>
+		<script>
+			var vault = new dhx.Vault("vault", {
+				uploader: {
+					target: "/backend/upload"
+				}
+			});
+			vault.data.parse(filesData);
+
+			function filterByName(value) {
+				vault.data.filter(function(item) {
+					return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+				});
+			}
+		</script>
+	</body>
+</html>

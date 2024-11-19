@@ -1,0 +1,21 @@
+FROM 606042651063.dkr.ecr.ca-central-1.amazonaws.com/service-stage:miniconda4_xetex_20.04_latest
+
+RUN mkdir /static 
+RUN mkdir /opt/venv/
+RUN mkdir -p public/answer_sheets/preview/ 
+RUN mkdir -p /backend_logs
+
+COPY . ./
+
+RUN conda create --prefix /opt/venv/backend python=3.7 
+ENV PATH /opt/venv/backend/bin:$PATH
+
+RUN pip --version 
+RUN pip install -r requirements.txt && \
+LDFLAGS=-fno-lto pip install gunicorn && \
+python3.7 manage.py collectstatic --no-input
+ENV C_FORCE_ROOT=true
+
+EXPOSE 8081
+
+CMD [ "sh","-c","python manage.py migrate && gunicorn --timeout 600 --access-logfile /backend_logs/access.log --error-logfile /backend_logs/error.log -w 2 -b :8081 swiftgrade_api.wsgi:application"]

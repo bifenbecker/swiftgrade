@@ -1,0 +1,11 @@
+ {
+	"applinks": {
+	  "apps": [],
+	  "details": [
+	  {
+	    "appID": "2G3WTG868G.Swift.Grade.Project.1.0",
+	    "paths": ["/reset/*", "/account_setup/*"]
+	  }
+	  ]
+	}
+  }

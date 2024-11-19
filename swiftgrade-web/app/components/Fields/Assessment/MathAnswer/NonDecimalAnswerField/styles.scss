@@ -1,0 +1,103 @@
+.non-decimal-input {
+
+  &.is-empty {
+    .mq-editable-field {
+      .mq-root-block::after {
+        content: 'Add a correct answer';
+        visibility: visible;
+        display: block;
+        position: absolute;
+        padding: 8px 0;
+        top: 2px;
+        color: rgba(0, 0, 0, 0.4);
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+        min-width: 0;
+        @media screen and (max-width: 960px ) {
+          content: 'Correct answer';
+          width: 90%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        @media (max-width: 600px) {
+          font-size: 12px;
+          padding: 10px 0;
+        }
+        @media (max-width: 355px) and (orientation: portrait) {
+          font-size: 10px;
+        }
+      }
+
+      .mq-root-block.mq-hasCursor::after {
+        padding: 8px 0px;
+      }
+    }
+  }
+
+  .mq-math-mode, .mq-math-mode .mq-editable-field {
+    cursor: text;
+    width: 95%;
+    font-family: unset;
+    min-height: 32px;
+    border: none;
+    margin-left: 4px;
+  }
+  .mq-editable-field.mq-focused {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+  .mq-root-block, .mq-math-mode .mq-root-block {
+      display: -moz-inline-box;
+      display: inline-block;
+      width: 100%;
+      padding: 10px 2px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: middle;
+      @media (max-width: 600px) {
+        font-size: 12px;
+        padding: 12px 0;
+      }
+      @media (max-width: 355px) and (orientation: portrait) {
+        font-size: 10px;
+      }
+  }
+  .mq-math-mode .mq-sqrt-stem {
+    border-top: 1px solid;
+    margin-top: 0px;
+    padding-left: 0.15em;
+    padding-right: 0.2em;
+    margin-right: 0.1em;
+    padding-top: 1px;
+  }
+  .mq-math-mode .mq-empty {
+    background: transparent;
+  }
+  .mq-math-mode {
+    font-variant: unset;
+    font-variant-ligatures: unset;
+    font-variant-caps: unset;
+    font-variant-numeric: unset;
+    font-variant-east-asian: unset;
+    font-weight: unset;
+    font-style: unset;
+    font-size: 16px;
+    line-height: 1;
+    display: -moz-inline-box;
+    display: inline-block;
+  }
+  .mq-sqrt-prefix {
+    font-family: 'Symbola, "Times New Roman", serif' !important;
+  }
+
+  .mq-selection {
+    color: black;
+    background-color: #b3d4fc !important;
+    .mq-non-leaf, .mq-scaled, .mq-paren {
+      color: black;
+      background-color: #b3d4fc !important;
+    }
+  }
+}

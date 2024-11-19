@@ -1,0 +1,191 @@
+.desktop-theme {
+  .hg-button {
+    color: #555555;
+    height: 32px !important;
+    font-family: Symbola, "Times New Roman", serif;
+    font-weight: normal;
+    border-radius: 2px;
+    font-size: 115%;
+    width: 100% !important;
+    @media (max-width: 960px) {
+      font-size: 16px;
+    }
+  }
+  .hg-row:not(:last-child) {
+    margin-bottom: 3px !important;
+  }
+  .service_symbols {
+    background: rgba(0, 0, 0, 0.13) !important;
+    color: black;
+    font-style: normal;
+    font-family: arial, sans-serif;
+    @media (max-width: 960px) {
+      font-size: 15px;
+    }
+  }
+  .letters {
+    font-style: italic;
+  }
+  .svg_functions {
+    span {
+      display: none !important;
+    }
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    color: #555555;
+  }
+  .a_superscript_b {
+    span {
+      display: none !important;
+    }
+    background-size: auto 50% !important;
+    background-image: url(/a_superscript_b.svg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+  .sqrt_n {
+    background-size: auto 65% !important;
+    background-image: url(/sqrt_n.svg) !important;
+  }
+  .a_superscript_2 {
+    background-size: auto 50% !important;
+    background-image: url(/a_superscript_2.svg) !important;
+  }
+  .a_subscript_b {
+    background-size: auto 38% !important;
+    background-image: url(/a_subscript_b.svg) !important;
+  }
+  .backspace {
+    background-size: auto 50% !important;
+    background-image: url(/backspace.svg) !important;
+  }
+  .move_buttons {
+    background: #4781b9 !important;
+    border: 1px solid #3f73a6 !important;
+    span {
+      color: white !important;
+    }
+  }
+  .enter {
+    span {
+      font-size: 20px !important;
+      height: 15px !important;
+    }
+  }
+  .tab {
+    font-size: 14px !important;
+    @media (max-width: 960px) {
+        font-size: 9px !important;
+      }
+  }
+}
+
+.desktop-math-theme {
+  .math_derivative {
+    font-size: 12px;
+    line-height: 6px;
+    text-align: center;
+    span {
+      width: 15px;
+    }
+  }
+  .math_numbers {
+    min-width: 16.2% !important;
+  }
+}
+
+.desktop-set-notation-theme {
+  .math_derivative {
+    font-size: 12px;
+    line-height: 6px;
+    text-align: center;
+    span {
+      width: 15px;
+    }
+  }
+  .math_numbers {
+    min-width: 16.2% !important;
+  }
+}
+
+.desktop-lower-letters-theme {
+  .lower_letters_helper {
+    display: flex;
+  }
+  .empty_button {
+    visibility: hidden;
+  }
+  .letters_service_symbols {
+    min-width: 11.18% !important;
+    @media (max-width: 960px) {
+      min-width: 11% !important;
+    }
+  }
+  .enter, .tab {
+    max-width: 7.3% !important;
+    @media (max-width: 960px) {
+      max-width: 7% !important;
+    }
+  }
+}
+
+.desktop-upper-letters-theme {
+  .letters_service_symbols {
+    min-width: 11.13% !important;
+    @media (max-width: 960px) {
+      min-width: 11% !important;
+    }
+  }
+  .enter, .tab {
+    max-width: 7.25% !important;
+    @media (max-width: 960px) {
+      max-width: 7% !important;
+    }
+  }
+}
+
+.desktop-numbers-theme {
+  .numbers_service_symbols {
+    min-width: 15% !important;
+    @media (min-width: 1600px) {
+      min-width: 15.1% !important;
+    }
+    @media (max-width: 960px) {
+      min-width: 14.7% !important;
+    }
+  }
+  .numbers_helper {
+    max-width: 4.67% !important;
+    @media (min-width: 1600px) {
+      max-width: 4.78% !important;
+    }
+    @media (max-width: 960px) {
+      max-width: 4.4% !important;
+    }
+  }
+  .empty_button {
+    visibility: hidden;
+  }
+  .comma_symbol {
+    background: rgba(0, 0, 0, 0.13) !important;
+    color: black;
+    font-style: normal;
+    font-family: arial, sans-serif;
+    @media (max-width: 960px) {
+      font-size: 15px;
+    }
+  }
+  .functions {
+    min-width: 9.9% !important;
+    @media (max-width: 960px) {
+      min-width: 9.5% !important;
+      font-size: 13px !important;
+    }
+  }
+}
+
+.desktop-numeric-theme {
+  .empty_button {
+    visibility: hidden;
+  }
+}

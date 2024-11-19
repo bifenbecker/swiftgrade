@@ -1,0 +1,47 @@
+.read_mode {
+  div.dhx_vault_file_param.dhx_vault_file_delete {
+    display: none !important;
+  }
+
+  .dhx_item--btn-remove {
+    display: none !important;
+  }
+
+  .dxi .dxi-delete-forever {
+    display: none !important;
+  }
+
+  .dhx_vault--container .dhx_dataview-item--remove-btn {
+    display: none;
+  }
+}
+
+.dhx-dropable-area .dhx-big-icon-block .dxi {
+  color: rgb(166, 166, 166);
+}
+
+.dhx-dragin .dhx-dropable-area .dhx-big-icon-block .dxi {
+  color: #0288d1; // color of the class should be here
+}
+
+.dhx_vault--container .dhx_list, .dhx_vault--toolbar .dhx_toolbar, .dhx-dropable-area {
+  background-color: white;
+}
+
+.dhx-dropable-area .drop-area-bold-text {
+  &:nth-child(3) {
+    margin-top: -5px;
+  }
+  color: rgb(166, 166, 166);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+
+}
+
+div.dhx_vault--container .dhx_button {
+  display: none;
+}
+
+.max_files_size_message {
+  width: 245px;
+}

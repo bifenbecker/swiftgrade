@@ -1,0 +1,83 @@
+.react-pdf__Page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  // height: 100%;
+  height: calc(100vh - 170px);
+  @media (max-width: 768px) {
+    height: auto!important;
+  }
+
+  .react-pdf__Page__canvas {
+    display: block;
+    user-select: none;
+    box-shadow: 0 0 25px grey;
+    // height: 85vh!important;
+    height: calc(100vh - 110px) !important;
+    width: auto!important;
+    max-width: 95%;
+    margin-top: 50px;
+
+    @media (max-width: 768px) {
+      height: auto!important;
+    }
+
+    @media (max-width: 600px) {
+      margin-top: 0;
+    }
+    //TODO - remove bottom lines after succsess tetsts
+    // @media (min-width: 1700px) {
+    //   width: 600px !important;
+    //   height: 849px !important;
+    // }
+
+    // @media (min-width: 1550px) and (max-width: 1700px) {
+    //   width: 510px !important;
+    //   height: 721px !important;
+    // }
+
+    // @media (min-width: 1400px) and (max-width: 1550px) {
+    //   width: 480px !important;
+    //   height: 679px !important;
+    // }
+
+    // @media (min-width: 1200px) and (max-width: 1400px) and (max-height: 900px) {
+    //   width: 420px !important;
+    //   height: 594px !important;
+    // }
+
+    // @media (min-width: 1200px) and (max-width: 1400px) and (min-height: 900px) {
+    //   width: 580px !important;
+    //   height: 820px !important;
+    // }
+
+    // @media (min-width: 1000px) and (max-width: 1200px) and (min-height: 900px) {
+    //   width: 500px !important;
+    //   height: 707px !important;
+    // }
+
+    // @media (min-width: 1000px) and (max-width: 1200px) and (max-height: 900px) {
+    //   width: 400px !important;
+    //   height: 566px !important;
+    // }
+
+    // @media (min-width: 1600px) and (max-height: 960px) {
+    //   width: 580px !important;
+    //   height: 821px !important;
+    // }
+
+    // @media (min-width: 0px) and (max-width: 900px) {
+    //   width: 90% !important;
+    //   height: 70vh !important;
+    // }
+  }
+  .react-pdf__Page__textContent {
+    height: 100% !important;
+    
+    span {
+      display: none !important;
+    }
+  }
+}

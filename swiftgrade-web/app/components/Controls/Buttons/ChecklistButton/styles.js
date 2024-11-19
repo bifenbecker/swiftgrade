@@ -1,0 +1,35 @@
+export const styles = () => ({
+  root: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'inherit',
+    textTransform: 'initial',
+    color: '#fff',
+    fontSize: '1rem',
+    borderRadius: 20,
+  },
+  checklist_button: {
+    borderRadius: 20,
+    boxShadow: '0 0 12px rgb(0 0 0 / 25%)',
+  },
+  checklist_button_icon: {
+    fill: '#fff',
+    width: 20,
+    height: 20,
+  },
+  steps_bagde: {
+    position: 'absolute',
+    top: '-6px',
+    right: '-6px',
+    width: '20px',
+    height: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#0F3AE8',
+    boxShadow: '0 0 12px rgb(0 0 0 / 25%)',
+  },
+});

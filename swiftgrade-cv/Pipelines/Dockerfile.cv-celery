@@ -1,0 +1,19 @@
+FROM 606042651063.dkr.ecr.ca-central-1.amazonaws.com/service-stage:miniconda4_xetex_20.04
+
+RUN mkdir /opt/backend && mkdir /opt/venv/ && \
+mkdir /static && \
+mkdir -p public/answer_sheets/preview/ && \
+mkdir -p public/tmp/ && \
+mkdir -p public/user_data/ && \
+mkdir /cv_logs
+RUN cd /opt/backend
+COPY . ./
+COPY .env ./
+RUN /opt/conda/bin/conda create --prefix /opt/venv/backend python=3.7
+RUN echo "source activate env" > ~/.bashrc
+ENV PATH /opt/conda/envs/env/bin:$PATH
+RUN /opt/venv/backend/bin/pip --version
+RUN /opt/venv/backend/bin/pip install -r requirements.txt
+RUN LDFLAGS=-fno-lto /opt/venv/backend/bin/pip install gunicorn
+
+CMD [ "sh","-c","/opt/venv/backend/bin/celery -A swiftgrade_cv worker --autoscale=10,4 -l INFO"]

@@ -1,0 +1,197 @@
+\documentclass[
+  english,
+  globalid=SDAPS,
+  checkmode=fill]{sdapsclassic}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{dashrule}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{xstring}
+\usepackage{fontspec}
+\usepackage{relsize}
+\setmainfont{Gordita-Regular.ttf}[
+  ItalicFont = Gordita-RegularItalic.otf,
+  Path = <font>
+]
+
+\title{}
+\author{\ }
+
+\ExplSyntaxOn
+  \bool_gset:Nn \g_sdaps_draft_bool \c_false_bool
+  \renewcommand{\familydefault}{\sfdefault}
+  \definecolor{mycolor}{RGB}{222,222,222}
+  \newcommand{\questiontitle}[1]{
+    \begin{tikzpicture}[remember~picture,overlay]
+      \begin{scope}[shift={($(0.027\textwidth,-6mm)$)}]
+        \node(questiontitlenode)[anchor=south~east,outer~sep=0,inner~sep=0]{
+          \textsf{\textscale{0.5}{#1}}
+        };
+      \end{scope}
+    \end{tikzpicture}
+  }
+  \newcommand{\countboxes}[2]{
+    \sdaps_qobject_begin:nnn { countboxes } { Choice } { #1 }
+    \sdaps_context_append:nnn { var } { #1 } { _ }
+    \dim_set:Nn \l_sdaps_checkbox_linewidth_dim { 1.5pt }
+    \dim_set:Nn \l_sdaps_checkbox_width_dim {5.5mm}
+    \dim_set:Nn \l_sdaps_checkbox_height_dim {5.5mm}
+    \vspace{4.5mm}
+    \hspace{2mm}
+    \begin{scriptsize}
+      \sdaps_context_set:n { * = { ellipse, centered_text = \textcolor{black}{A} } }
+      \sdaps_answer:n { #1_c_1 } \sdaps_checkbox:nn {#1_c_1} {}
+      \hspace{2mm}
+      \sdaps_context_set:n { * = { ellipse, centered_text = \textcolor{black}{B} } }
+      \sdaps_answer:n { #1_c_2 } \sdaps_checkbox:nn {#1_c_2} {}
+      \hspace{2mm}
+      \sdaps_context_set:n { * = { ellipse, centered_text = \textcolor{black}{C} } }
+      \sdaps_answer:n { #1_c_3 } \sdaps_checkbox:nn {#1_c_3} {}
+      \hspace{2mm}
+      \sdaps_context_set:n { * = { ellipse, centered_text = \textcolor{black}{D} } }
+      \sdaps_answer:n { #1_c_4 } \sdaps_checkbox:nn {#1_c_4} {}
+      \hspace{2mm}
+      \sdaps_context_set:n { * = { ellipse, centered_text = \textcolor{black}{E} } }
+      \sdaps_answer:n { #1_c_5 } \sdaps_checkbox:nn {#1_c_5} {}
+    \end{scriptsize}
+
+    \sdaps_qobject_end:n { countboxes }
+  }
+  \newcommand{\mytextbox}[3]{
+    \sdaps_qobject_begin:nnn { inlinetextbox } { Text } { #2 }
+    \dim_set:Nn \l_tmpa_dim { #1 }
+    \dim_set:Nn \l_tmpb_dim { #1 }
+    \dim_set:Nn \l_tmpa_dim { 0.5 \l_tmpa_dim - 0.8ex }
+    \dim_set:Nn \l_tmpb_dim { 0.5 \l_tmpb_dim + 0.8ex }
+
+    \ifthenelse{\equal{#3}{}}{}{
+      \vspace{-3.73mm}
+      {\small \textscale{0.75}{\textit{#3}}}
+      \par
+    }
+
+    \sdaps_textbox_hstretch:nVVnn { #2 } \l_tmpa_dim \l_tmpb_dim { 0pt } { 1 }
+    \sdaps_qobject_end:n { inlinetextbox }
+  }
+  \geometry{footskip=<footskip>}
+  \geometry{headheight=<headheight>}
+  \chead{
+    \vspace{<instructions_top_margin1>}
+    \includegraphics[scale=0.275]{<tex_folder>/images/instructions.png}~
+    \vspace{<instructions_bottom_margin1>}
+    \par
+    <header>
+  }
+  \newcommand{\toptextbox}[2]{
+    \sdaps_qobject_begin:nnn { inlinetextbox } { Text } { #2 }
+    \dim_set:Nn \l_tmpa_dim { #1 }
+    \dim_set:Nn \l_tmpb_dim { #1 }
+    \dim_set:Nn \l_tmpa_dim { 0.5 \l_tmpa_dim - 0.8ex }
+    \dim_set:Nn \l_tmpb_dim { 0.5 \l_tmpb_dim + 0.8ex }
+    \vspace{-0.8mm}
+    {\small \textscale{0.8}{\textit{#2:}}}
+    \vspace{0.3mm}
+    \par
+    \sdaps_textbox_hstretch:nVVnn { #2 } \l_tmpa_dim \l_tmpb_dim { 0pt } { 1 }
+    \sdaps_qobject_end:n { inlinetextbox }
+  }
+  \newcommand{\sdaps_draw_codes:}{
+    \group_begin:
+      \begin{scope}[line~width=\g_sdaps_edge_marker_linewidth_dim, shift={(current~page.south~west)}]
+
+        % bottom-left anchor
+        \begin{scope}[shift={(<anchor_left_margin>, <anchor_bottom_margin>)}]
+          \draw [black, fill=black] (0, 0) rectangle (<anchor_width>, <anchor_height>);
+
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*1) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*2) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*3+0.1mm);
+
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*1) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*3) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*4+0.1mm);
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*4) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*5+0.1mm);
+
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*1) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*2+0.1mm);
+
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*2) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*3+0.1mm);
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*4) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*5+0.1mm);
+        \end{scope}
+
+        % top-left anchor
+        \begin{scope}[shift={($(0, \paperheight)+(<anchor_left_margin>, -<anchor_top_margin>-<anchor_height>)$)}]
+          \draw [black, fill=black] (0, 0) rectangle (<anchor_width>, <anchor_height>);
+
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*1) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*2) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*3+0.1mm);
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*3) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*4+0.1mm);
+
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*3) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*4+0.1mm);
+
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*1) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*3) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*4+0.1mm);
+
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*2) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*3+0.1mm);
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*3) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*4+0.1mm);
+        \end{scope}
+
+        % top-right anchor
+        \begin{scope}[shift={($(\paperwidth, \paperheight)+(-<anchor_right_margin>,-<anchor_top_margin>-<anchor_height>)$)}]
+          \draw [black, fill=black] (0, 0) rectangle (<anchor_width>, <anchor_height>);
+
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*1) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*2+0.1mm);
+
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*1) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*2+0.1mm);
+
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*2) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*3+0.1mm);
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*3) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*4+0.1mm);
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*4) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*5+0.1mm);
+
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*1) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*3) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*4+0.1mm);
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*4) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*5+0.1mm);
+        \end{scope}
+
+        % bottom-right anchor
+        \begin{scope}[shift={($(\paperwidth, 0)+(-<anchor_right_margin>, <anchor_bottom_margin>)$)}]
+          \draw [black, fill=black] (0, 0) rectangle (<anchor_width>, <anchor_height>);
+
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*3) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*4+0.1mm);
+          \fill [white] (<anchor_width>/6*1, <anchor_height>/6*4) rectangle (<anchor_width>/6*2+0.1mm, <anchor_height>/6*5+0.1mm);
+
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*1) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*2+0.1mm);
+          \fill [white] (<anchor_width>/6*2, <anchor_height>/6*2) rectangle (<anchor_width>/6*3+0.1mm, <anchor_height>/6*3+0.1mm);
+
+          \fill [white] (<anchor_width>/6*3, <anchor_height>/6*1) rectangle (<anchor_width>/6*4+0.1mm, <anchor_height>/6*2+0.1mm);
+
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*3) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*4+0.1mm);
+          \fill [white] (<anchor_width>/6*4, <anchor_height>/6*4) rectangle (<anchor_width>/6*5+0.1mm, <anchor_height>/6*5+0.1mm);
+        \end{scope}
+
+        \begin{scope}
+          \ttfamily\small
+
+          \begin{scope}[shift={($(<anchor_left_margin>, <anchor_bottom_margin>) + (<anchor_width>+5mm, -0.5mm)$)}]
+            \node(sheet)[anchor=south~west,outer~sep=0,inner~sep=0]{
+              \includegraphics[scale=0.4]{<logo>}
+            };
+          \end{scope}
+
+          <footer>
+        \end{scope}
+
+      \end{scope}%
+    \group_end:
+  }
+  \setlength{\baselineskip}{2.5mm}
+  \renewcommand{\tabcolsep}{0pt}
+\ExplSyntaxOff
+
+\begin{document}
+  \begin{questionnaire}[noinfo]
+    <user_data>
+    <content>
+  \end{questionnaire}
+\end{document}

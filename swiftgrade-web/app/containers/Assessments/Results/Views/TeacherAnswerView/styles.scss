@@ -1,0 +1,20 @@
+.letters_answer_field {
+  .mq-math-mode var, .mq-math-mode i, .mq-math-mode i.mq-font {
+    font-style: normal !important;
+  }
+  .mq-math-mode .mq-empty {
+    background: #fff;
+  }
+}
+
+.student_answer_value {
+  .mq-math-mode var, .mq-math-mode i, .mq-math-mode i.mq-font {
+    font-style: normal;
+  }
+}
+
+.numeric_answer {
+  .mq-math-mode .mq-empty {
+    background: #fff;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "dhx-vault-package",
+  "version": "4.0.0",
+  "description": "dhtmlxVault widget",
+  "homepage": "https://docs.dhtmlx.com/vault",
+  "private": true,
+  "bugs": {
+    "url": "https://forum.dhtmlx.com",
+    "email": "support@dhtmlx.com"
+  },
+  "main": "codebase/vault.js",
+  "types": "codebase/vault.d.ts"
+}

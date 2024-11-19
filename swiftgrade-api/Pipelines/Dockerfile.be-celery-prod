@@ -1,0 +1,20 @@
+FROM 606042651063.dkr.ecr.ca-central-1.amazonaws.com/service-stage:miniconda4_xetex_20.04_latest
+
+
+RUN mkdir /opt/venv/
+RUN mkdir -p public/answer_sheets/preview/ 
+RUN mkdir -p /backend_logs
+
+COPY . ./
+
+
+RUN conda create --prefix /opt/venv/backend python=3.7
+ENV PATH /opt/venv/backend/bin:$PATH
+
+RUN pip --version
+RUN pip install -r requirements.txt && \
+LDFLAGS=-fno-lto pip install gunicorn
+ENV C_FORCE_ROOT=true
+
+
+CMD [ "sh","-c","celery -A swiftgrade_api beat -l INFO -S django & celery worker -A swiftgrade_api -B -l INFO --autoscale=10,4"]

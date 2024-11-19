@@ -1,0 +1,101 @@
+export const styles = () => ({
+  form: {
+    maxWidth: 270,
+    width: '100%',
+    margin: '0 auto',
+  },
+  buttons: {
+    marginTop: 35,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  button: {
+    marginRight: 20,
+  },
+  block_input: {
+    position: 'relative',
+    width: '100%',
+    marginBottom: 25,
+    '& .MuiInputBase-root': {
+      width: '100%',
+    },
+  },
+  error_input_join: {
+    margin: '2px 0px',
+    fontSize: 14,
+    color: 'red',
+    textAlign: 'left',
+    position: 'static',
+  },
+  label_item: {
+    fontSize: 18,
+    paddingRight: 15,
+    width: 110,
+  },
+  input_root: {
+    backgroundColor: '#fff',
+    border: '1px solid #e4e4e4',
+    fontSize: 14,
+    color: '#6d7881',
+    borderRadius: 3,
+    height: 37,
+    lineHeight: 'normal',
+    margin: 0,
+    marginBottom: 0,
+    padding: '0px 8px 0px 8px',
+    transition: 'border .15s',
+    width: '100%',
+    boxSizing: 'border-box',
+    '&::placeholder': {
+      color: '#bebfc6',
+      lineHeight: '49px',
+      opacity: 1,
+    },
+  },
+  input: {
+    border: 'none',
+    padding: 0,
+    height: 25,
+  },
+  input_focused: {
+    borderColor: '#549dfb',
+    outline: 1,
+  },
+  select_root: {
+    backgroundColor: '#fff',
+    border: '1px solid #e4e4e4',
+    fontSize: 14,
+    color: '#6d7881',
+    borderRadius: 3,
+    height: 37,
+    lineHeight: 'normal',
+    margin: 0,
+    marginBottom: 0,
+    padding: '0px 0px 0px 8px',
+    transition: 'border .15s',
+    width: '100%',
+    boxSizing: 'border-box',
+    '&.Mui-focused': {
+      borderColor: '#549dfb',
+      outline: 0,
+    },
+    '& .MuiInputAdornment-positionEnd': {
+      right: 10,
+      '& svg': {
+        width: '12px !important',
+        height: '12px !important',
+        fill: '#000',
+      },
+    },
+  },
+  select_input: {
+    padding: 0,
+    fontSize: 'inherit',
+    height: 'auto',
+  },
+  select_focused: {
+    borderColor: '#549dfb',
+    outline: 0,
+  },
+});

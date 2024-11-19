@@ -1,0 +1,177 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrahead %}{{ block.super }}
+  <script type="text/javascript" src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
+  <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css">
+
+  <span style="display: inline-flex;">
+    <form id="resultTypeForm"  style="padding-right: 10px;">
+      <select name="resultType" id="resultType"></select>
+    </form>
+    <form id="periodForm">
+      <label for="period">Choose a period in days:</label>
+      <select name="period" id="period"></select>
+      <input type="submit" value="Load" name="_load">
+    </form>
+  </span>
+
+  <script id="loadCharts" chartType={{chartType}} dataUrl={{dataUrl}} periodsUrl={{periodsUrl}} resultsTypeUrl={{resultsTypeUrl}}>
+    const resultTypeElement = "#resultType";
+    const chartBarType = "bar";
+    const chartLineType = "line";
+    const periodIdElement = "#period";
+    const twoWeekendIndex = 1;
+    const twoWeekendValue = "14";
+    let defaultChartType = document.getElementById("loadCharts").getAttribute("chartType");
+    let dataUrl = document.getElementById("loadCharts").getAttribute("dataUrl");
+    let resultsTypeUrl = document.getElementById("loadCharts").getAttribute("resultsTypeUrl");
+    let periodsUrl = document.getElementById("loadCharts").getAttribute("periodsUrl");
+    let lineChartResultTypes = ['total', 'active', 'students', 'new', 'new_students', 'returning'];
+    $(document).ready(function() {
+      const resultTypeFormElement = $("#resultTypeForm");
+      resultTypeFormElement.hide();
+
+      if (resultsTypeUrl) {
+        resultTypeFormElement.show();
+        $.ajax({
+          url: resultsTypeUrl,
+          type: "GET",
+          dataType: "json",
+          success: (jsonResponse) => {
+            // Load the answer type options
+            const defaultResultTypeValue = jsonResponse.options[0].title;
+            jsonResponse.options.forEach(option => {
+              // Set the internal name and title to the option
+              $(resultTypeElement).append(new Option(option.title, option.param));
+            });
+            let resultTypeChildElements = $("#resultTypeForm").find("select")[0];
+            let resultTypeSpanElement = $("#resultTypeForm").find('#select2-resultType-container')[0];
+            setDefaultSelectedElement(resultTypeChildElements, "resultTypeForm", 0, resultTypeSpanElement, defaultResultTypeValue)
+          },
+          error: () => console.log("Failed to fetch chart answer type options!")
+        });
+      }
+      $.ajax({
+        url: periodsUrl,
+        type: "GET",
+        dataType: "json",
+        success: (jsonResponse) => {
+          // Load all the options
+          jsonResponse.options.forEach(option => {
+            $(periodIdElement).append(new Option(option.title, option.param));
+          });
+          let periodChildrenElements = $("#periodForm").find("select")[0];
+          let periodSpanElement = $("#periodForm").find('#select2-period-container')[0];
+          if (periodChildrenElements.length > twoWeekendIndex && periodChildrenElements[twoWeekendIndex].value === twoWeekendValue) {
+            setDefaultSelectedElement(periodChildrenElements, "periodForm", twoWeekendIndex, periodSpanElement, twoWeekendValue);
+            loadAllCharts(periodChildrenElements[twoWeekendIndex].value, dataUrl, getResultType());
+          } else {
+            // Load data for the first option
+            loadAllCharts(periodChildrenElements.first().val(), dataUrl, getResultType());
+          }
+        },
+        error: () => console.log("Failed to fetch chart period options!")
+      });
+    });
+
+    $("#periodForm").on("submit", (event) => {
+      event.preventDefault();
+
+      const period = $(periodIdElement).val();
+
+      loadAllCharts(period, dataUrl, getResultType());
+    });
+
+    function getResultType() {
+      return $(resultTypeElement).val() ? $(resultTypeElement).val() : undefined;
+    }
+
+    function getChartType() {
+      const resultType = getResultType();
+
+      if(resultType === 'total' || resultType === undefined || lineChartResultTypes.includes(resultType)) {
+        return defaultChartType;
+      }
+      return chartBarType;
+    }
+
+    function getTooltipText(tooltipItem, data) {
+      let sum = defaultChartType === chartBarType ?
+                data.datasets[0].data[tooltipItem.index] :
+                data.datasets.reduce((sum, dataset) => {
+         	        return sum + dataset.data[tooltipItem.index];
+                }, 0);
+      let itemValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+      let percent = Math.round(itemValue / sum * 100);
+
+      return data.datasets[tooltipItem.datasetIndex].label + ': ' + itemValue + ' ' + '(' + percent + '%)';
+    }
+
+
+    function loadChart(chart, endpoint) {
+      $.ajax({
+        url: endpoint,
+        type: "GET",
+        dataType: "json",
+        success: (jsonResponse) => {
+          // Extract data from the response
+          const title = jsonResponse.title;
+          const labels = jsonResponse.data.labels;
+          const datasets = jsonResponse.data.datasets;
+          // Reset the current chart
+          chart.data.datasets = [];
+          chart.data.labels = [];
+          // Load new data into the chart
+          chart.options.title.text = title;
+          chart.options.title.display = true;
+          chart.data.labels = labels;
+          chart.config.type = getChartType();
+          if (chart.config.type === chartBarType) {
+            if (defaultChartType === chartLineType) { 
+              chart.config.options.scales.xAxes[0].stacked = true;
+              chart.config.options.scales.yAxes[0].stacked = true;
+            }
+            chart.options.tooltips.callbacks.label = getTooltipText;
+          }
+          datasets.forEach(dataset => {
+              chart.data.datasets.push(dataset);
+          });
+          chart.update();
+        },
+        error: () => console.log("Failed to fetch chart data from " + endpoint + "!")
+      });
+    }
+
+    function loadAllCharts(period, dataUrl, resultType) {
+      const endpoint = resultType === undefined ? `${dataUrl}/${period}/` : `${dataUrl}/${resultType}/${period}/`;
+
+      loadChart(statisticsChart, endpoint);
+    }
+
+    function setDefaultSelectedElement(childElement, formName, selectedElementIndex, spanElement, title) {
+        childElement[0].selected = true;
+        $(`#${formName}`).find("select")[0].selectedIndex = selectedElementIndex;
+        spanElement.title = title;
+        spanElement.textContent = title;
+    }
+  </script>
+  <div>
+    <canvas id="statisticsChart"></canvas>
+  </div>
+  <script id="chartStats">
+    let statisticsCtx = document.getElementById("statisticsChart").getContext("2d");
+    let statisticsChart = new Chart(statisticsCtx, {
+      options: {
+        responsive: true,
+      }
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: flake8
+        name: flake8 check
+        language_version: python3
+        args: ["--exclude=*/migrations/*,scripts/*,*settings*,manage.py,*tests*,*/__init__.py", --max-line-length=119]
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    rev: v1.0.4
+    hooks:
+    -   id: python-bandit-vulnerability-check
+        name: Bandit check
+        language_version: python3

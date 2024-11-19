@@ -1,0 +1,22 @@
+.react-tel-input {
+  margin: 10px 0 0;
+
+  .special-label {
+    display: none;
+  }
+
+  & .form-control {
+    width: 270px;
+    padding: 10px 14px 10px 58px;
+
+    &:hover {
+      border-color: #cacaca;
+    }
+
+    &:focus {
+      border-color: #f7b3cc;
+      outline: none;
+      box-shadow: 0 0 0 0 #f7b3cc;
+    }
+  }
+}

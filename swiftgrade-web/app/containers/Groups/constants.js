@@ -1,0 +1,11 @@
+export const COPY_GROUP_REQUEST = 'groups/COPY_GROUP_REQUEST';
+export const CREATE_GROUPS_REQUEST = 'groups/CREATE_GROUPS_REQUEST';
+export const DELETE_GROUP_REQUEST = 'groups/DELETE_GROUP_REQUEST';
+export const GET_GROUP_REQUEST = 'groups/GET_GROUP_REQUEST';
+export const GET_GROUPS_REQUEST = 'groups/GET_GROUPS_REQUEST';
+export const JOIN_GROUP_REQUEST = 'groups/JOIN_GROUP_REQUEST';
+export const RENAME_GROUP_REQUEST = 'groups/RENAME_GROUP_REQUEST';
+export const SET_GROUP = 'groups/SET_GROUP';
+export const SET_GROUPS = 'groups/SET_GROUPS';
+export const SET_LOADING = 'groups/SET_LOADING';
+export const SET_IS_NEW_SESSION = 'groups/IS_NEW_SESSION';

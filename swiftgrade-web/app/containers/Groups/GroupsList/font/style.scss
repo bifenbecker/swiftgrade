@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Gordita';
+  font-display: block;
+  src: local('Gordita Medium'), local('Gordita--Medium'), url('Gordita-Medium.woff2') format('woff2'),
+    url('Gordita-Medium.woff') format('woff'), url('Gordita-Medium.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gordita Regular';
+  font-display: block;
+  src: local('GorditaRegular'), local('GorditaRegular'), url('GorditaRegular.woff2') format('woff2'),
+    url('GorditaRegular.woff') format('woff'), url('GorditaRegular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gordita Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('GorditaLight'), url('GorditaLight.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gordita Thin';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Gordita Thin'), url('Gordita Thin.woff') format('woff');
+}
+
+.logo_text {
+  font-family: 'Gordita';
+}

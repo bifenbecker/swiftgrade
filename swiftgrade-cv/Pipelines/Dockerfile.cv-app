@@ -1,0 +1,22 @@
+FROM 606042651063.dkr.ecr.ca-central-1.amazonaws.com/service-stage:miniconda4_xetex_20.04
+
+RUN mkdir /opt/backend && mkdir /opt/venv/ && \
+mkdir /static && \
+mkdir -p public/answer_sheets/preview/ && \
+mkdir -p public/tmp/ && \
+mkdir -p public/user_data/ && \
+mkdir /cv_logs
+RUN cd /opt/backend
+COPY . ./
+COPY .env ./
+RUN /opt/conda/bin/conda create --prefix /opt/venv/backend python=3.7
+RUN echo "source activate env" > ~/.bashrc
+ENV PATH /opt/conda/envs/env/bin:$PATH
+RUN /opt/venv/backend/bin/pip --version
+RUN /opt/venv/backend/bin/pip install -r requirements.txt
+RUN LDFLAGS=-fno-lto /opt/venv/backend/bin/pip install gunicorn
+RUN /opt/venv/backend/bin/python3.7 manage.py collectstatic --no-input
+
+EXPOSE 8092
+
+CMD [ "sh","-c","/opt/venv/backend/bin/python manage.py migrate && /opt/venv/backend/bin/python manage.py run_seeds --name all && /opt/venv/backend/bin/gunicorn --access-logfile /cv_logs/access.log --error-logfile /cv_logs/error.log   -w 2 -b :8092 swiftgrade_cv.wsgi:application"]

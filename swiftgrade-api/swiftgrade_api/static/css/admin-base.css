@@ -1,0 +1,136 @@
+.results {
+    min-height: 300px;
+}
+.changelist-footer .fixed {
+    border-top: 0;
+}
+/* delete-confirmation */
+.delete-confirmation #content .delete-confirmation-summary:not(:first-of-type) {
+    margin-top: 30px;
+}
+.delete-confirmation #content .delete-confirmation-summary>p+h2+ul {
+    background: #f0dada;
+    color: #d49d9d;
+    border-radius: 4px;
+    border-radius: 0.28571rem;
+    padding: 20px;
+    padding: 1.42857rem;
+    list-style-type: none;
+    margin: 0;
+}
+.delete-confirmation #content .delete-confirmation-summary>p+h2+ul li {
+    list-style: none;
+    line-height: 1.8;
+}
+.delete-confirmation #content .delete-confirmation-summary>ul:nth-of-type(2)>li,
+.delete-confirmation #content .delete-confirmation-summary>p+ul>li {
+    padding: 8px;
+    padding: 0.57143rem;
+    border-bottom: 1px solid #f4f4f4;
+    border-bottom: 0.07143rem solid #f4f4f4;
+    font-size: 13px;
+    font-size: 0.92857rem;
+    list-style: none;
+}
+.delete-confirmation #content .delete-confirmation-summary>ul:nth-of-type(2),
+.delete-confirmation #content .delete-confirmation-summary>p+ul {
+    background: #fff;
+    border-radius: 4px;
+    border-radius: 0.28571rem;
+    box-shadow: 0 2px 0 0 #d0dbe6;
+    box-shadow: 0 0.14286rem 0 0 #d0dbe6;
+}
+.delete-confirmation #content .delete-confirmation-summary>ul:nth-of-type(2),
+.delete-confirmation #content .delete-confirmation-summary>ul:nth-of-type(2) ul,
+.delete-confirmation #content .delete-confirmation-summary>p+ul,
+.delete-confirmation #content .delete-confirmation-summary>p+ul ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.submit-row .close-campaign-button,
+.submit-row .download-report-button {
+    font-weight: lighter;
+    background-color: #c14747;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 8px 0 0;
+    margin: 0 0.57143rem 0 0;
+    padding: 0 20px;
+    padding: 0 1.42857rem;
+    display: block;
+    float: right;
+    margin: 0 5px 5px 0;
+    margin: 0 0.35714rem 0.35714rem 0;
+}
+.submit-row .download-report-button,
+.results .download-report-button {
+    background-color: #639af5;
+    text-transform: initial;
+    color: #fff;
+}
+.submit-row .close-campaign-button:visited,
+.submit-row .close-campaign-button:hover,
+.submit-row .close-campaign-button:focus,
+.submit-row .download-report-button:visited,
+.submit-row .download-report-button:hover,
+.submit-row .download-report-button:focus,
+.results .download-report-button:visited,
+.results .download-report-button:hover,
+.results .download-report-button:focus {
+    cursor: pointer;
+}
+
+.page-inline-group .tabular th.original,
+.page-inline-group .tabular td.original {
+    white-space: nowrap;
+    width: 1px;
+    padding-right: 0;
+}
+
+.page-inline-group .tabular th.original.empty,
+.page-inline-group .tabular td.original.empty {
+    padding: 0;
+}
+
+.page-inline-group .tabular th.original p,
+.page-inline-group .tabular td.original p {
+    padding: 0;
+}
+
+.page-inline-group .tabular td.original p .inlinechangelink,
+.page-inline-group .tabular td.original p .inlineviewlink {
+    font-size: 18px;
+    margin: 0;
+    vertical-align: middle;
+}
+.module table thead th,
+.module table tbody td,
+.page-inline-group .tabular thead th,
+.page-inline-group .tabular tbody td {
+    white-space: inherit;
+}
+
+.admindatefilter .form-label {
+    margin-bottom: 5px;
+}
+.custom-multi-select + .select2-container {
+    max-width: 500px;
+    max-height: 200px;
+    overflow-y: auto;
+    min-width: 260px;
+}
+
+@media only screen and (max-width: 960px) {
+    .custom-multi-select + .select2-container {
+        min-width: 300px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .custom-multi-select + .select2-container {
+        min-width: 100%;
+    }
+}
+.model-yodleetransaction .select2-container.select2-container--jet {
+    min-width: 250px;
+}

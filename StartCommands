@@ -1,0 +1,31 @@
+web:
+  cd swiftgrade-web/
+  yarn start
+
+api:
+
+  cd swiftgrade-api/
+  conda activate swiftgrade
+  python manage.py runserver 5000
+
+cv:
+
+  cd swiftgrade-cv/
+  conda activate swiftgrade_cv
+  python manage.py runserver 8001
+
+redis:
+
+  redis-server --port 6381
+
+celery-cv-worker:
+
+  cd swiftgrade-cv/
+  conda activate swiftgrade_cv
+  celery -A swiftgrade_cv worker -l INFO 
+
+celery-api-worker:
+
+  cd swiftgrade-api/
+  conda activate swiftgrade
+  celery -A swiftgrade_api worker -l INFO 

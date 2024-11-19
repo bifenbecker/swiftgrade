@@ -1,0 +1,14 @@
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(64, 62, 62, 0.487);
+    box-shadow: 0 0 0 0 rgba(64, 62, 62, 0.487);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}

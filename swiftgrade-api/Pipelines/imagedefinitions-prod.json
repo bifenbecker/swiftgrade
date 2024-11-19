@@ -1,0 +1,26 @@
+[
+  {
+    "name": "backend-celery-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-celery-prod:latest"
+  },
+  {
+    "name": "backend-app-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-app-prod:latest"
+  },
+  {
+    "name": "backend-admin-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/backend-admin-prod:latest"
+  },
+  {
+    "name": "cv-app-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/cv-app-prod:latest"
+  },
+  {
+    "name": "cv-celery-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/cv-celery-prod:latest"
+  },
+  {
+    "name": "nginx-prod",
+    "imageUri": "606042651063.dkr.ecr.ca-central-1.amazonaws.com/nginx-prod:latest"
+  }
+]

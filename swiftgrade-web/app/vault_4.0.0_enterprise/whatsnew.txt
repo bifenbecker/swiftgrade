@@ -1,0 +1,25 @@
+Version 4.0.0 (October 7, 2020)
+----------------------------
+
+### New functionality
+
+- TypeScript support
+- Enhanced work on touch devices
+- New events are added: AfterDrag, AfterDrop, BeforeDrag, BeforeDrop, CancelDrop, CanDrop, Click, DoubleClick, DragIn, DragOut, DragStart, FocusChange, ItemMouseOver, ItemRightClick
+- The ability to include additional parameters into request headers via the headerParams property of the Uploader configuration object
+- The controls for switching between the "list" and "grid" modes now are shown in the toolbar of Vault by default. It is possible to hide the controls by setting the modeControls: false property
+- The ability to drag-and-drop files in the queue
+- The ability to select and remove several files from the queue at once
+
+#### Fixes
+
+- Fix the ability to drag-and-drop files on touch devices
+
+Version 3.0 (September 2018)
+-----------------
+
+- Configurable vault layout
+- Ability to add extra buttons to the vault's toolbar
+- Grid mode
+
+https://docs.dhtmlx.com/vault/whats_new.html
